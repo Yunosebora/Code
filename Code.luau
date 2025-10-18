@@ -35,7 +35,7 @@ function HUDManager.new(player)
 
 	local frame = Instance.new("Frame")
 	frame.Size = UDim2.new(1, 0, 1, 0)
-	frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	frame.BackgroundColor3 = (player == LocalPlayer) and Color3.fromRGB(50, 50, 50) or Color3.fromRGB(0, 0, 0)
 	frame.BackgroundTransparency = 0.5
 	frame.BorderSizePixel = 0
 	frame.Parent = self.Gui
@@ -118,9 +118,8 @@ end
 
 --// ▼ Add HUD for each player
 local function CreateHUDFor(player)
-	if player == LocalPlayer then return end
 	if HUDManager.ActiveHUDs[player] then return end
-	local newHUD = HUDManager.new(player)
+	HUDManager.new(player)
 end
 
 --// ▼ Remove HUD when player leaves
@@ -167,3 +166,4 @@ task.spawn(function()
 end)
 
 print("✅ Dynamic NameTag HUD System Loaded Successfully")
+
